@@ -1,21 +1,37 @@
-# vadmin
+**Vue后台项目管理系统Demo**
 
-> A Vue.js project
+此项目为Vue后台管理系统，功能为：增删改查，搜索，用JSONSERVER进行本地的模拟API接口
 
-## Build Setup
+**用户管理系统**
 
-``` bash
-# install dependencies
-npm install
+Vue后台管理系统搭建项目-->创建路由-->分为主页，关于我的
 
-# serve with hot reload at localhost:8080
-npm run dev
+1.渲染数据
 
-# build for production with minification
-npm run build
+准后工作就绪之后，第一步先请求数据渲染到首页中，安装Vue-resource  进行请求数据，然后渲染到页面中
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+用到的v-for ，打印一下返回的res，在data中定义一个变量，接收返回的值，并进行遍历，显示到首页中
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+2.增加用户信息   
+
+（业务逻辑）点击添加用户按钮，进入添加页面，然后输入信息，点击添加
+
+首先创建添加的组件，Add组件，router-link跳转到Add页面，在页面中填写个人信息，点击添加按钮，提交表单，默认在表单里有一个事件，这个事件用来post数据到JSONSERVER，把填写的信息组装成一个对象的格式，传给JSONSERVER
+
+3.编辑用户信息，删除用户信息
+
+（业务逻辑）在主页中添加一个详情的按钮，点击之后进入详情页，可以查看个人信息详情，并且在详情页有编辑，删除按钮，来进行修改与删除操作，分析：当你点击详情按钮时，传入一个用户的id值来进入你点击某个用户的个人信息：（这里涉及路由传值，当你的路径动态绑定了参数时path:'/custorm/:id'） component:Detail   在一进入页面的时候就要获取到当前你点击用户id值。方法：his.$route.params.id
+
+在调用请求函数的时候需要传一个参数：id --->这个id就是当前我们点击的这个id值，需要在请求中拼接上，才能得到对应的数据，同渲染数据一步。	
+
+删除用户信息，是根据唯一标识，用户id来删除，在详情页点开是，添加两个按钮，编辑，与删除
+
+在删除按钮中绑定方法，传入id 发一个对数据库的删除的请求，然后执行跳转到首页的操作
+
+
+
+编辑用户信息，点击详情进入详情页点击编辑按钮，进入编辑页面，在编辑前应显示当前点击的这个用户的个人详情，所以需要在编辑前渲染好页面，就和添加页的结构类似，进行操作，与添加类似
+
+
+
+最后为了增加用户体验用到Alert弹出警告框，进行提示用户，父传子的props传值方式，动态为子组件传值

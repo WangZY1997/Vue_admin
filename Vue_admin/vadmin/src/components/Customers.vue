@@ -40,14 +40,14 @@
         },
         methods:{
             fetchCustomers(){
-                this.$http.get("http://localhost:3000/users").then(function (response) {
-                    // console.log(response)
-                    if(response .status===200){
-                        this.customers = response.body;
-                        // console.log(this.customers)
-                    }
+                    this.$http.get("http://localhost:3000/users").then(function (response) {
+                        // console.log(response)
+                        if(response .status===200){
+                            this.customers = response.body;
+                            // console.log(this.customers)
+                        }
 
-                })
+                    })
             },
             fliterBy(customers,value){
               return customers.filter(function (customer) {
